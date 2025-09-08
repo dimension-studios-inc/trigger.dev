@@ -2,6 +2,26 @@
 
 ![Trigger.dev logo](https://content.trigger.dev/github-header-banner.jpg)
 
+### Custom trigger.dev image
+Every changement we do need to be merged to `custom` branch. Main is always clean and up to date with the official trigger.dev image.
+
+### Deploy hotfix on your own registry
+```bash
+aws ecr-public get-login-password --region us-east-1 --profile dimension-gha | docker login --username AWS --password-stdin public.ecr.aws/n5q7l0s4          
+docker build -t trigger-webapp -f ./docker/Dockerfile .
+docker tag trigger-webapp public.ecr.aws/n5q7l0s4/trigger-webapp:latest
+docker push public.ecr.aws/n5q7l0s4/trigger-webapp:latest
+kubectl rollout restart deployment trigger-webapp -n trigger
+```
+
+```bash
+aws ecr-public get-login-password --region us-east-1 --profile dimension-gha | docker login --username AWS --password-stdin public.ecr.aws/n5q7l0s4          
+docker build -t trigger-supervisor -f ./apps/supervisor/Containerfile .
+docker tag trigger-supervisor public.ecr.aws/n5q7l0s4/trigger-supervisor:latest
+docker push public.ecr.aws/n5q7l0s4/trigger-supervisor:latest
+kubectl rollout restart deployment trigger-supervisor -n trigger
+```
+
 ### Build and deploy fully‑managed AI agents and workflows
 
 [Website](https://trigger.dev) | [Docs](https://trigger.dev/docs) | [Issues](https://github.com/triggerdotdev/trigger.dev/issues) | [Feature requests](https://triggerdev.featurebase.app/) | [Public roadmap](https://triggerdev.featurebase.app/roadmap) | [Self-hosting](https://trigger.dev/docs/self-hosting/overview)
