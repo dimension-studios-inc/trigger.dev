@@ -3,7 +3,7 @@
 ![Trigger.dev logo](https://content.trigger.dev/github-header-banner.jpg)
 
 ### Custom trigger.dev image
-Every changement we do need to be merged to `custom` branch.
+Every changement we do need to be merged to `custom` branch. Main is always clean and up to date with the official trigger.dev image.
 
 ### Deploy hotfix on your own registry
 ```bash
