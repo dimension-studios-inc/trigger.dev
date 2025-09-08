@@ -305,8 +305,8 @@ export class KubernetesWorkloadManager implements WorkloadManager {
   }
 
   #getResourceRequestsForMachine(preset: MachinePreset): ResourceQuantities {
-    const cpuRequest = preset.cpu * this.cpuRequestRatio;
-    const memoryRequest = preset.memory * this.memoryRequestRatio;
+    const cpuRequest = preset.cpuRequest ?? preset.cpu * this.cpuRequestRatio;
+    const memoryRequest = preset.memoryRequest ?? preset.memory * this.memoryRequestRatio;
 
     // Clamp between min and max
     const clampedCpu = this.clamp(cpuRequest, this.cpuRequestMinCores, preset.cpu);
